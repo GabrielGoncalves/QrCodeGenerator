@@ -23,6 +23,11 @@ class QRDecoder:
         image = cls.invert_colors(image)
         return decode(image)
 
+    @classmethod
+    def default_decoder(cls, image):
+        image = cls.load_image(image)
+        return decode(image)
+
 def select_file():
     root = tk.Tk()
     root.withdraw()  # Esconde a janela principal
@@ -35,7 +40,11 @@ def get_data_qrcode(image_path):
     if result:
         return result[0].data.decode('utf-8') 
     else:
-        return "Nenhum código QR encontrado ou não foi possível decodificar."
+        result_default = QRDecoder.default_decoder(image_path)
+        if result_default:
+            return result_default[0].data.decode('utf-8')
+        else:
+            return "Nenhum código QR encontrado ou não foi possível decodificar."
 
 def main():
     file_path = select_file()
