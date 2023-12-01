@@ -19,8 +19,9 @@ class QRDecoder:
     @classmethod
     def decode_qr(cls, image):
         image = cls.load_image(image)
-        image = cls.convert_to_grayscale(image)
-        image = cls.invert_colors(image)
+        if image.mode != 'L':
+            image = cls.convert_to_grayscale(image)
+            image = cls.invert_colors(image)
         return decode(image)
 
     @classmethod
