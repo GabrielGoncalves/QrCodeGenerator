@@ -27,7 +27,7 @@ def inclusion(data_list):
         data_list.append(data)
         total = 9 - inclus
         if inclus != 9:
-        	console.print(f'Você tem mais {total}', style="italic black on white")
+        	console.print(f'Você tem mais {total}', style="italic bright_cyan")
 
 # confere o valor no formato rgb
 def Check_value_input_rgb(color):
@@ -65,15 +65,15 @@ def generate_qr():
 
     if color_method == '1':
         while True:
-            fill_color = input('Cor de preenchimento [blue](ex: 255, 0, 0)[/blue]: ')
+            fill_color = console.input('Cor de preenchimento [blue](ex: 255, 0, 0)[/blue]: ')
             if Check_value_input_rgb(fill_color):
                 fill_color = tuple(map(int, fill_color.split(',')))
                 break
             else:
-                print("Formato de cor inválido. Por favor, insira no formato correto.")
+                console.print("Formato de cor inválido. Por favor, insira no formato correto.", style="bold red")
 
         while True:
-            back_color = input('Cor de fundo RGB [blue](ex: 0, 0, 0)[/blue]: ')
+            back_color = console.input('Cor de fundo RGB [blue](ex: 0, 0, 0)[/blue]: ')
             if Check_value_input_rgb(back_color):
                 back_color = tuple(map(int, back_color.split(',')))
                 break
@@ -132,7 +132,7 @@ def generate_qr():
 
 # chamada para abrir o explorer
 def explorer(address):
-    open_dir = console.input('Deseja abrir o local do arquivo [bold green][s][/bold green] ou [bold red][n][/bold red]? ')
+    open_dir = console.input('Deseja abrir o local do arquivo [bold green]S[/bold green] ou [bold red]N[/bold red]? ')
     if open_dir.lower() == 's':
         os.startfile(address)
 
@@ -140,7 +140,7 @@ while True:
     address = generate_qr()
     explorer(str(address))
 
-    repeat = input('Deseja gerar outro QrCode? [s] ou [n]: ')
+    repeat = console.input('[sea_green2]Deseja gerar outro QrCode?[/sea_green2] [green]S[/green] ou [red]N[/red]: ')
     if repeat.lower() != 's':
         break
-    console.clear() # limpa o terminal para uma nova geração
+    os.system('cls' if os.name == 'nt' else 'clear')
